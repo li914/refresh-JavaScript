@@ -69,10 +69,13 @@
 <script src="./jquery.js"></script>
 <script>
     //------------------------下拉刷新-------------------------------
+    //定义的全局变量
     var disY, startY, endY;
+    //触摸事件开始时触发
     $('.scroll').on('touchstart', function (e) {
         startY = e.changedTouches[0].pageY;
     });
+    //触摸事件移动中时触发
     $('.scroll').on('touchmove', function (e) {
         endY = e.changedTouches[0].pageY;
         disY = endY - startY;
@@ -83,10 +86,12 @@
             });
         }
     });
+    //触摸事件结束时触发
     $('.scroll').on('touchend', function (e) {
         endY = e.changedTouches[0].pageY;
         disY = endY - startY;
         if (disY > 72) {
+            //定义一个定时器，返回下拉到一定的高度
             var timer = setInterval(function () {
                 disY -= 13;
                 if (disY <= 60) {
@@ -105,7 +110,7 @@
     //请求刷新数据
     function refresh() {
         var t = setTimeout(function () {
-            for (var i = 0; i < 7; i++) {
+            for (var i = 0; i < 13; i++) {
                 $('.scroll ul').append('<li>' + '添加的数据:' + parseInt(i + 1) + '</li>');
             }
             $('.status').css({
